@@ -1,5 +1,5 @@
 export default {
-  LatestStats: 'Latest stats',
+  LatestStats: 'Latest stats of {car}',
   DcBatteryPower: 'DC battery power',
   DcBatteryCurrent: 'DC battery current',
   DcBatteryVoltage: 'DC battery voltage',
@@ -9,4 +9,5 @@ export default {
   SOH: 'SoH',
   SocBms: 'SoC BMS',
   SocDisplay: 'SoC Display',
+  ShowAll: 'Show all data',
 }

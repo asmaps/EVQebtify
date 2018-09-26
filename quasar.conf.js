@@ -35,8 +35,8 @@ module.exports = function (ctx) {
       }
     },
     devServer: {
-      // https: true,
-      // port: 8080,
+      https: true,
+      port: 8042,
       open: false // opens browser window automatically
     },
     // framework: 'all' --- includes everything; for dev only!
@@ -46,6 +46,7 @@ module.exports = function (ctx) {
         'QCard',
         'QCardMain',
         'QCardTitle',
+        'QCollapsible',
         'QField',
         'QIcon',
         'QInput',
