@@ -1,9 +1,9 @@
 <template>
   <q-page padding class="row gutter-sm">
-    <div class="col-xs-12 col-sm-6 col-lg-3" v-if="this.$route.name !== 'log-list'">
+    <div class="col" v-if="this.$route.name !== 'log-list'">
       <router-view></router-view>
     </div>
-    <div class="col">
+    <div class="col" v-else>
       <q-list>
         <q-list-header>{{ $t('logs.Logs') }}</q-list-header>
         <q-item :to="{name: 'log-detail', params: {logId: log.id}}"

@@ -1,5 +1,11 @@
 <template>
   <div v-if="log">
+    <div class="generic-margin">
+      <q-btn color="primary"
+             icon="fas fa-caret-left"
+             :label="$t('BackToList')"
+             @click="$router.push({name: 'log-list'})" />
+    </div>
     <div v-if="log.loading">
       <q-spinner-puff size="50px">{{ $t('log.loadingLog') }}</q-spinner-puff>
     </div>
@@ -15,6 +21,9 @@
         <q-card-main v-else>
           <h4><i class="text-primary fas fa-car"></i> {{ $t('logs.Drive') }}</h4>
         </q-card-main>
+        <q-card-main>
+          <log-graph :data="graphData"></log-graph>
+        </q-card-main>
         <q-card-title>{{ $t('logs.startTime') }}</q-card-title>
         <q-card-main>
           {{ $moment.unix(log.start).format('LLLL') }}
@@ -29,7 +38,12 @@
 </template>
 
 <script>
+import LogGraph from 'components/LogGraph'
+
 export default {
+  components: {
+    LogGraph,
+  },
   data () {
     return {
       log: undefined,
@@ -39,6 +53,35 @@ export default {
   computed: {
     rid () {
       return this.$route.params.logId
+    },
+    graphData () {
+      if (!this.log || !Array.isArray(this.log.stats)) {
+        return []
+      }
+
+      let soc = this.log.stats.filter(el => el.soc_display || el.soc_bms)
+      soc.sort((a, b) => a.timestamp - b.timestamp)
+      return {
+        labels: soc.map(el => this.$moment.unix(el.timestamp).format('LTS')),
+        datasets: [
+          {
+            label: 'SOC Display',
+            borderColor: '#50f84f',
+            fill: false,
+            lineTension: 0,
+            spanGaps: true,
+            data: soc.map(el => el.soc_display),
+          },
+          {
+            label: 'SOC BMS',
+            borderColor: '#f83be1',
+            fill: false,
+            lineTension: 0,
+            spanGaps: true,
+            data: soc.map(el => el.soc_bms),
+          }
+        ]
+      }
     },
   },
   watch: {
