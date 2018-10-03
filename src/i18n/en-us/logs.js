@@ -1,8 +1,11 @@
 export default {
   Logs: 'Logs',
   NoLogs: 'No logs found',
-  startTime: 'Start time',
-  endTime: 'End time',
+  StartTime: 'Start time',
+  EndTime: 'End time',
   Drive: 'Drive',
   ChargingStop: 'Charging stop',
+  Date: 'Date',
+  Map: 'Map',
+  Graph: 'Graph',
 }

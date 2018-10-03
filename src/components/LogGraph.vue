@@ -10,6 +10,9 @@ export default {
     return {
       options: {
         maintainAspectRatio: false,
+        animation: {
+          duration: 0,
+        },
       }
     }
   },
