@@ -7,6 +7,7 @@ module.exports = function (ctx) {
       'i18n',
       'axios',
       'asyncComputed',
+      'vueMoment',
     ],
     css: [
       'app.styl'
