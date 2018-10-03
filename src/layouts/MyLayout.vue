@@ -16,8 +16,29 @@
           {{ $t('nav.title') }}
           <div slot="subtitle">{{ $t('nav.subtitle') }}</div>
         </q-toolbar-title>
+
+        <q-btn
+          flat
+          dense
+          round
+          @click="logout"
+          aria-label="Logout"
+          v-if="loggedIn"
+        >
+          <q-icon name="fas fa-sign-out-alt" />
+        </q-btn>
+        <q-btn
+          flat
+          dense
+          round
+          @click="$router.push({name: 'login'})"
+          aria-label="Logout"
+          v-else
+        >
+          <q-icon name="fas fa-sign-in-alt" />
+        </q-btn>
       </q-toolbar>
-      <q-tabs>
+      <q-tabs v-if="loggedIn">
         <q-route-tab
           icon="fas fa-home"
           :to="{name: 'dashboard'}"
@@ -74,8 +95,23 @@ export default {
       leftDrawerOpen: false,
     }
   },
+  computed: {
+    loggedIn () {
+      return this.$store.getters['auth/loggedIn']
+    },
+  },
+  watch: {
+    loggedIn (val) {
+      if (!val) {
+        this.$router.push({name: 'login', query: {next: this.$route.path}})
+      }
+    },
+  },
   methods: {
-    openURL
+    openURL,
+    logout () {
+      this.$store.commit('auth/setAuth', {})
+    }
   }
 }
 </script>

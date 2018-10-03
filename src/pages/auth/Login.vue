@@ -34,8 +34,8 @@ export default {
     async login () {
       try {
         let response = await this.$http.post('/login', {akey: this.akey, password: this.pass})
-        this.$store.commit('setAuth', {akey: this.akey, token: response.data.token})
-        this.$router.push({name: 'dashboard'})
+        this.$store.commit('auth/setAuth', {akey: this.akey, token: response.data.token})
+        this.$router.push(this.$route.query.next || {name: 'dashboard'})
       } catch (error) {
         this.errorMsg = error.response.data.error.message
       }
