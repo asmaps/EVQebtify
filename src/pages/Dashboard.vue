@@ -82,7 +82,7 @@ export default {
       mapMarker: undefined,
     }
   },
-  created () {
+  mounted () {
     this.fetch()
   },
   watch: {
@@ -97,6 +97,9 @@ export default {
       }
     }
   },
+  updated () {
+    this.mapWidth = this.$refs.map.clientWidth
+  },
   computed: {
     locationAvailable () {
       return this.location && this.location.longitude && this.location.latitude
@@ -106,12 +109,6 @@ export default {
         return []
       }
       return [this.location.latitude, this.location.longitude]
-    },
-    mapWidth () {
-      if (!this.$refs || !this.$refs.map || !this.map) {
-        return 0
-      }
-      return this.$refs.map.offsetWidth
     },
   },
   methods: {
@@ -177,6 +174,3 @@ export default {
     padding: 1rem;
   }
 </style>
-
-<style src="leaflet/dist/leaflet.css"></style>
-<style src="leaflet-fontawesome-markers/L.Icon.FontAwesome.css"></style>

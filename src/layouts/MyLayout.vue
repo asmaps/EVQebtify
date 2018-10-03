@@ -17,6 +17,27 @@
           <div slot="subtitle">{{ $t('nav.subtitle') }}</div>
         </q-toolbar-title>
       </q-toolbar>
+      <q-tabs>
+        <q-route-tab
+          icon="fas fa-home"
+          :to="{name: 'dashboard'}"
+          exact
+          slot="title"
+          :label="$t('nav.Dashboard')"
+        />
+        <q-route-tab
+          icon="fas fa-list"
+          :to="{name: 'log-list'}"
+          slot="title"
+          :label="$t('nav.Logs')"
+        />
+        <q-route-tab
+          icon="fas fa-charging-station"
+          :to="{name: 'station-list'}"
+          slot="title"
+          :label="$t('nav.Stations')"
+        />
+      </q-tabs>
     </q-layout-header>
 
     <q-layout-drawer
@@ -28,7 +49,7 @@
         link
         inset-delimiter
       >
-        <q-list-header>Essential Links</q-list-header>
+        <q-list-header>{{ $t('nav.Links') }}</q-list-header>
         <q-item @click.native="openURL('https://evnotify.de')">
           <q-item-side icon="fas fa-home" />
           <q-item-main :label="$t('nav.EVNotifyHomepage')" sublabel="https://evnotify.de" />
@@ -37,7 +58,9 @@
     </q-layout-drawer>
 
     <q-page-container>
-      <router-view />
+      <transition mode="out-in" :duration="300" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+        <router-view />
+      </transition>
     </q-page-container>
   </q-layout>
 </template>
@@ -48,7 +71,7 @@ import { openURL } from 'quasar'
 export default {
   data () {
     return {
-      leftDrawerOpen: this.$q.platform.is.desktop
+      leftDrawerOpen: false,
     }
   },
   methods: {
@@ -59,3 +82,6 @@ export default {
 
 <style>
 </style>
+
+<style src="leaflet/dist/leaflet.css"></style>
+<style src="leaflet-fontawesome-markers/L.Icon.FontAwesome.css"></style>

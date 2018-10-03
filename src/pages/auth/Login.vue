@@ -34,8 +34,7 @@ export default {
     async login () {
       try {
         let response = await this.$http.post('/login', {akey: this.akey, password: this.pass})
-        this.$q.localStorage.set('akey', this.akey)
-        this.$q.localStorage.set('token', response.data.token)
+        this.$store.commit('setAuth', {akey: this.akey, token: response.data.token})
         this.$router.push({name: 'dashboard'})
       } catch (error) {
         this.errorMsg = error.response.data.error.message

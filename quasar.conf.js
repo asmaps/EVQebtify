@@ -5,7 +5,8 @@ module.exports = function (ctx) {
     // app plugins (/src/plugins)
     plugins: [
       'i18n',
-      'axios'
+      'axios',
+      'asyncComputed',
     ],
     css: [
       'app.styl'
@@ -45,6 +46,7 @@ module.exports = function (ctx) {
         'QBtn',
         'QCard',
         'QCardMain',
+        'QCardMedia',
         'QCardTitle',
         'QCollapsible',
         'QField',
@@ -62,8 +64,13 @@ module.exports = function (ctx) {
         'QListHeader',
         'QPage',
         'QPageContainer',
+        'QTabs',
+        'QTab',
+        'QTabPane',
+        'QRouteTab',
         'QToolbar',
         'QToolbarTitle',
+        'QSpinnerPuff',
       ],
       directives: [
         'Ripple'
@@ -77,7 +84,10 @@ module.exports = function (ctx) {
       // i18n: 'de' // Quasar language
     },
     // animations: 'all' --- includes all animations
-    animations: [],
+    animations: [
+      'fadeIn',
+      'fadeOut',
+    ],
     ssr: {
       pwa: false
     },
