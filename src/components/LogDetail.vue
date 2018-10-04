@@ -156,7 +156,7 @@ export default {
       if (this.rid) {
         this.log = {loading: true}
         try {
-          let response = await this.$http.get('/log', {
+          let response = await this.$http.get('/logdetail', {
             params: {id: this.rid},
             cancelToken: new this.$http.CancelToken(cancel => {
               this.refreshLogCancel = cancel
