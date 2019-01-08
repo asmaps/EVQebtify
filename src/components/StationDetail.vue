@@ -17,6 +17,9 @@
         <q-card-main>
           <a target="_blank" :href="station.url">
             <i class="fas fa-external-link-alt"></i> {{ $t('station.showOnGE') }}
+          </a><br>
+          <a v-if="station.coordinates" target="_blank" :href="locationURL">
+            <i class="fas fa-external-link-alt"></i> {{ $t('station.openWithMaps') }}
           </a>
           <p v-if="station.address" class="generic-margin">
             {{ station.address.street }}<br>
@@ -47,6 +50,9 @@ export default {
     }
   },
   computed: {
+    locationURL () {
+      return 'https://maps.google.com/?q=' + this.station.coordinates.lat + ',' + this.station.coordinates.lng
+    },
     rid () {
       return this.$route.params.stationId
     },
