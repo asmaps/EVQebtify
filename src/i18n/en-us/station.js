@@ -11,5 +11,6 @@ export default {
   Chargepoints: 'Chargepoints',
   ChargingStationsNearYou: 'Charging stations near you',
   showOnGE: 'Show on GoingElectric',
+  openWithMaps: 'Open with Google Maps',
   chargepointtype,
 }

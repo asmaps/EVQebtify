@@ -5,6 +5,7 @@
         <q-card>
           <q-card-title>
             {{ $t('dashboard.LatestStats', {car: (settings || {}).car}) }}
+            <span slot="subtitle" v-if="soc">{{ `${$moment.unix(soc.last_soc).format('LLLL')}` }}</span>
             <span slot="right"><q-btn icon="fas fa-sync" round flat @click="fetch" /></span>
           </q-card-title>
           <q-card-main>
@@ -43,6 +44,21 @@
                   <q-item-side icon="fas fa-heart" />
                   <q-item-main :label="`${(lastStats.soh || 0.0).toFixed(1)}%`"
                                :sublabel="$t('dashboard.SOH')" />
+                </q-item>
+                <q-item>
+                  <q-item-side icon="fas fa-temperature-low" />
+                  <q-item-main :label="`${(lastStats.battery_min_temperature || 0)}°C`"
+                               :sublabel="$t('dashboard.BatteryMinTemperature')" />
+                </q-item>
+                <q-item>
+                  <q-item-side icon="fas fa-temperature-high" />
+                  <q-item-main :label="`${(lastStats.battery_max_temperature || 0)}°C`"
+                               :sublabel="$t('dashboard.BatteryMaxTemperature')" />
+                </q-item>
+                <q-item>
+                  <q-item-side icon="fas fa-wind" />
+                  <q-item-main :label="`${(lastStats.battery_inlet_temperature || 0)}°C`"
+                               :sublabel="$t('dashboard.BatteryInletTemperature')" />
                 </q-item>
                 <q-item v-if="soc">
                   <q-item-side icon="fas fa-battery-empty" />
