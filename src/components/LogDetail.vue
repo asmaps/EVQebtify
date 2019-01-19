@@ -133,7 +133,7 @@ export default {
         },
         {
           label: 'Battery Temperature (Inlet) °C',
-          borderColor: '#b31212',
+          borderColor: '#5a5252',
           fill: false,
           lineTension: 0,
           spanGaps: true,
