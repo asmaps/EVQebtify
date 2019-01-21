@@ -84,9 +84,9 @@ export default {
 
       let soc
       if (this.isCharge) {
-        soc = this.log.stats.filter(el => (el.soc_display || el.soc_bms || el.dc_battery_power))
+        soc = this.log.stats.filter(el => (el.soc_display || el.soc_bms || el.dc_battery_power || el.battery_min_temperature || el.battery_max_temperature || el.battery_inlet_temperature))
       } else {
-        soc = this.log.stats.filter(el => (el.soc_display || el.soc_bms || el.dc_battery_power || el.gps_speed))
+        soc = this.log.stats.filter(el => (el.soc_display || el.soc_bms || el.dc_battery_power || el.gps_speed || el.battery_min_temperature || el.battery_max_temperature || el.battery_inlet_temperature))
       }
 
       soc.sort((a, b) => a.timestamp - b.timestamp)
@@ -114,6 +114,30 @@ export default {
           lineTension: 0,
           spanGaps: true,
           data: soc.map(el => el.dc_battery_power ? el.dc_battery_power * (this.isCharge ? -1 : 1) : el.dc_battery_power),
+        },
+        {
+          label: 'Battery Temperature (Min) °C',
+          borderColor: '#00b8ff',
+          fill: false,
+          lineTension: 0,
+          spanGaps: true,
+          data: soc.map(el => el.battery_min_temperature),
+        },
+        {
+          label: 'Battery Temperature (Max) °C',
+          borderColor: '#b31212',
+          fill: false,
+          lineTension: 0,
+          spanGaps: true,
+          data: soc.map(el => el.battery_max_temperature),
+        },
+        {
+          label: 'Battery Temperature (Inlet) °C',
+          borderColor: '#5a5252',
+          fill: false,
+          lineTension: 0,
+          spanGaps: true,
+          data: soc.map(el => el.battery_inlet_temperature),
         },
       ]
       if (!this.isCharge) {
